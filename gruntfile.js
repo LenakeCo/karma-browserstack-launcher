@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = function (grunt) {
   grunt.initConfig({
     pkgFile: 'package.json',
@@ -53,7 +55,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['eslint'])
 
-  grunt.registerTask('release', 'Bump the version and publish to NPM.', function (type) {
+  grunt.registerTask('release', 'Bump the version and publish to NPM.', type => {
     grunt.task.run([
       'npm-contributors',
       'bump-only:' + (type || 'patch'),

@@ -1,12 +1,14 @@
-var Browserstack = require('browserstack')
+'use strict'
 
-var BrowserStackReporter = function (logger, /* BrowserStack:sessionMapping */ sessionMapping) {
-  var log = logger.create('reporter.browserlabs')
+const Browserstack = require('browserstack')
 
-  var pendingUpdates = 0
-  var callWhenFinished = function () {}
+const BrowserStackReporter = function (logger, /* BrowserStack:sessionMapping */ sessionMapping) {
+  const log = logger.create('reporter.browserlabs')
 
-  var exitIfAllFinished = function () {
+  let pendingUpdates = 0
+  let callWhenFinished = function () {}
+
+  const exitIfAllFinished = function () {
     if (pendingUpdates === 0) {
       callWhenFinished()
     }
@@ -14,7 +16,7 @@ var BrowserStackReporter = function (logger, /* BrowserStack:sessionMapping */ s
 
   // We're only interested in the final results per browser
   this.onBrowserComplete = function (browser) {
-    var result = browser.lastResult
+    const result = browser.lastResult
 
     if (result.disconnected) {
       log.error('✖ Test Disconnected')
@@ -24,19 +26,20 @@ var BrowserStackReporter = function (logger, /* BrowserStack:sessionMapping */ s
       log.error('✖ Test Errored')
     }
 
-    var browserId = browser.launchId || browser.id
+    const browserId = browser.launchId || browser.id
     if (browserId in sessionMapping) {
       pendingUpdates++
-      var browserstackClient = Browserstack.createAutomateClient(sessionMapping.credentials)
-      var apiStatus = !(result.failed || result.error || result.disconnected) ? 'completed' : 'error'
+      const browserstackClient = Browserstack.createAutomateClient(sessionMapping.credentials)
+      const apiStatus = !(result.failed || result.error || result.disconnected) ? 'completed' : 'error'
 
       browserstackClient.updateSession(sessionMapping[browserId], {
         status: apiStatus
-      }, function (error) {
+      }, error => {
         if (error) {
           log.error('✖ Could not update BrowserStack status')
           log.debug(error)
         }
+
         pendingUpdates--
         exitIfAllFinished()
       })
