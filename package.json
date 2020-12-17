@@ -38,6 +38,12 @@
     "grunt-npm": "~0.0.2",
     "load-grunt-tasks": "^3.5.2"
   },
+  "files": [
+    "browserstack-reporter.js",
+    "index.js",
+    "worker.js",
+    "worker-manager.js"
+  ],
   "contributors": [
     "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
     "dignifiedquire <dignifiedquire@gmail.com>",
