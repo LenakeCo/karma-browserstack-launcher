@@ -70,10 +70,6 @@ const createBrowserStackClient = function (/* config.browserStack */config, /* B
     options.proxy = config.proxyProtocol + '://' + proxyAuth + config.proxyHost + ':' + config.proxyPort
   }
 
-  if (!config.browserstack || config.browserStack.startTunnel !== false) {
-    options.Local = true
-  }
-
   sessionMapping.credentials = {
     username: options.username,
     password: options.password,
