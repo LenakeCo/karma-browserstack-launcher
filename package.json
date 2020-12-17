@@ -5,8 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/karma-runner/karma-browserstack-launcher.git"
+    "url": "git+https://github.com/karma-runner/karma-browserstack-launcher.git"
   },
+  "bugs": {
+    "url": "https://github.com/karma-runner/karma-browserstack-launcher/issues"
+  },
+  "homepage": "https://github.com/karma-runner/karma-browserstack-launcher#readme",
   "keywords": [
     "karma-plugin",
     "karma-launcher",
