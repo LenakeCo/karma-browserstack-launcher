@@ -66,7 +66,8 @@ const createBrowserStackClient = function (/* config.browserStack */config, /* B
   if (config.proxyHost && config.proxyPort) {
     config.proxyProtocol = config.proxyProtocol || 'http'
     const proxyAuth = (config.proxyUser && config.proxyPass)
-      ? (encodeURIComponent(config.proxyUser) + ':' + encodeURIComponent(config.proxyPass) + '@') : ''
+      ? (encodeURIComponent(config.proxyUser) + ':' + encodeURIComponent(config.proxyPass) + '@')
+      : ''
     options.proxy = config.proxyProtocol + '://' + proxyAuth + config.proxyHost + ':' + config.proxyPort
   }
 
